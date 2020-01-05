@@ -524,7 +524,7 @@ func (uart UART) Configure(config UARTConfig) {
 		txpad = sercomTXPad2
 	case PA18:
 		txpad = sercomTXPad2
-	case PA16:
+	case PA17:
 		txpad = sercomTXPad0
 	default:
 		panic("Invalid TX pin for UART")
@@ -540,7 +540,7 @@ func (uart UART) Configure(config UARTConfig) {
 	case PA18:
 		rxpad = sercomRXPad2
 	case PA16:
-		rxpad = sercomRXPad0
+		rxpad = sercomRXPad1
 	case PA19:
 		rxpad = sercomRXPad3
 	case PA17:
