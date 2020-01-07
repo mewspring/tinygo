@@ -15,7 +15,7 @@ import (
 	"github.com/tinygo-org/tinygo/compileopts"
 	"github.com/tinygo-org/tinygo/compiler"
 	"github.com/tinygo-org/tinygo/goenv"
-	"github.com/tinygo-org/tinygo/interp"
+	//"github.com/tinygo-org/tinygo/interp"
 )
 
 // Build performs a single package to executable Go build. It takes in a package
@@ -43,13 +43,14 @@ func Build(pkgName, outpath string, config *compileopts.Config, action func(stri
 		return errors.New("verification error after IR construction")
 	}
 
-	err = interp.Run(c.Module(), config.DumpSSA())
-	if err != nil {
-		return err
-	}
-	if err := c.Verify(); err != nil {
-		return errors.New("verification error after interpreting runtime.initAll")
-	}
+	// TODO: re-enable interpretation.
+	//err = interp.Run(c.Module(), config.DumpSSA())
+	//if err != nil {
+	//	return err
+	//}
+	//if err := c.Verify(); err != nil {
+	//	return errors.New("verification error after interpreting runtime.initAll")
+	//}
 
 	if config.GOOS() != "darwin" {
 		c.ApplyFunctionSections() // -ffunction-sections
