@@ -21,7 +21,7 @@ import (
 	"github.com/tinygo-org/tinygo/builder"
 	"github.com/tinygo-org/tinygo/compileopts"
 	"github.com/tinygo-org/tinygo/goenv"
-	"github.com/tinygo-org/tinygo/interp"
+	//"github.com/tinygo-org/tinygo/interp"
 	"github.com/tinygo-org/tinygo/loader"
 
 	serial "go.bug.st/serial.v1"
@@ -617,23 +617,25 @@ func usage() {
 func handleCompilerError(err error) {
 	if err != nil {
 		switch err := err.(type) {
-		case *interp.Unsupported:
-			// hit an unknown/unsupported instruction
-			fmt.Fprintln(os.Stderr, "#", err.ImportPath)
-			msg := "unsupported instruction during init evaluation:"
-			if err.Pos.String() != "" {
-				msg = err.Pos.String() + " " + msg
-			}
-			fmt.Fprintln(os.Stderr, msg)
-			err.Inst.Dump()
-			fmt.Fprintln(os.Stderr)
+		// TODO: re-enable interpretation.
+		//case *interp.Unsupported:
+		//	// hit an unknown/unsupported instruction
+		//	fmt.Fprintln(os.Stderr, "#", err.ImportPath)
+		//	msg := "unsupported instruction during init evaluation:"
+		//	if err.Pos.String() != "" {
+		//		msg = err.Pos.String() + " " + msg
+		//	}
+		//	fmt.Fprintln(os.Stderr, msg)
+		//	err.Inst.Dump()
+		//	fmt.Fprintln(os.Stderr)
 		case types.Error, scanner.Error:
 			fmt.Fprintln(os.Stderr, err)
-		case interp.Error:
-			fmt.Fprintln(os.Stderr, "#", err.ImportPath)
-			for _, err := range err.Errs {
-				fmt.Fprintln(os.Stderr, err)
-			}
+		// TODO: re-enable interpretation.
+		//case interp.Error:
+		//	fmt.Fprintln(os.Stderr, "#", err.ImportPath)
+		//	for _, err := range err.Errs {
+		//		fmt.Fprintln(os.Stderr, err)
+		//	}
 		case loader.Errors:
 			fmt.Fprintln(os.Stderr, "#", err.Pkg.ImportPath)
 			for _, err := range err.Errs {
