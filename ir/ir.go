@@ -6,9 +6,9 @@ import (
 	"sort"
 	"strings"
 
+	irvalue "github.com/llir/llvm/ir/value"
 	"github.com/tinygo-org/tinygo/loader"
 	"golang.org/x/tools/go/ssa"
-	"tinygo.org/x/go-llvm"
 )
 
 // This file provides a wrapper around go/ssa values and adds extra
@@ -27,7 +27,7 @@ type Program struct {
 // Function or method.
 type Function struct {
 	*ssa.Function
-	LLVMFn    llvm.Value
+	LLVMFn    irvalue.Value
 	module    string     // go:wasm-module
 	linkName  string     // go:linkname, go:export, go:interrupt
 	exported  bool       // go:export
